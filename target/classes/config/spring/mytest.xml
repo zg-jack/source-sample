@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:jack="http://www.dongnaoedu.com/schema/soa"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans 
+       http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	   http://www.dongnaoedu.com/schema/soa 
+	   http://www.dongnaoedu.com/schema/soa.xsd"
+       default-lazy-init="true">
+ 	<jack:registry id="registry" protocol="101.200.129.112" address="27017"></jack:registry>
+ 	<jack:reference id="reference" interface="101.200.129.112" loadbalance="6379" protocol="xx"></jack:reference>
+ 	<jack:protocol id="protocol" name="101.200.129.112" port="27017"></jack:protocol>
+ 	<jack:service id="service" interface="101.200.129.112" ref="27017"></jack:service>
+</beans>  
