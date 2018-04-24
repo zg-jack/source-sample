@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.zhuguang.jack.bean.ConsultConfigArea;
 import com.zhuguang.jack.bean.ConsultContent;
 import com.zhuguang.jack.dao.CommonMapper;
+import com.zhuguang.jack.springtest.MyAnnotation;
 
 @Service
 public class CommonServiceImpl implements CommonService {

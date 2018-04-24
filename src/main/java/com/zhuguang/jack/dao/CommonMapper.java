@@ -3,8 +3,8 @@ package com.zhuguang.jack.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.type.Alias;
+import org.apache.ibatis.annotations.InsertProvider;
+import org.apache.ibatis.annotations.SelectProvider;
 import org.springframework.stereotype.Repository;
 
 import com.zhuguang.jack.bean.ConsultConfigArea;
@@ -56,6 +56,10 @@ public interface CommonMapper {
     
     int updateRecordCount(Map param);
     
+    //    @Select("select * from consultconfig_area")
+    //SelectProvider这个是需要自己提供类和方法，然后在方法里面定义sql语句
+//    @SelectProvider(method = "getAreaSql", type = MySelectProvider.class)
+    //    @Options(fetchSize=1,)
     List<ConsultConfigArea> qryArea(Map param);
     
     List<ConsultContract> qryContracts(Map param);

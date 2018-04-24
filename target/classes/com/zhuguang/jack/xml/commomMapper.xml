@@ -143,7 +143,7 @@
 		</choose>  
 	</select>
   
-	<select id="queryUserByPsptId" parameterType="java.util.Map" resultType="java.util.Map">
+	<select id="queryUserByPsptId"  parameterType="java.util.Map" resultType="java.util.Map">
   	select *,date_format(birthday,'%Y-%m-%d') birthday1,date_format(activeTime,'%Y-%m-%d') activeTime1 from consult_idcardinfo where psptId = #{psptId,jdbcType=VARCHAR}
 	</select>
 	
@@ -240,6 +240,12 @@
 	<select id="qryArea" parameterType="java.util.Map" resultMap="AreaResultMap">
 		
 		select * from consult_configarea
+		<if test="state != null and state != ''" >
+			where state = #{state,jdbcType=VARCHAR}
+		</if>
+		<if test="areaCode != null and areaCode != ''" >
+			and areaCode = #{areaCode,jdbcType=VARCHAR}
+		</if>
 
 	</select>
 	

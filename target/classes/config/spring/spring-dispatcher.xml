@@ -1,3 +1,4 @@
+
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -64,30 +65,30 @@
 	</bean>
 	
 	<!--
-	<bean id="student" class="com.zhuguang.jack.testbean.Student">
-		<property name="list[0]" value="1"></property>
-		<property name="list[1]" value="2"></property>
-		<property name="list[2]" value="3"></property>
-		
-		<property name="mylist">
-			<list>
-				<value>a</value>
-				<value>b</value>
-				<value>c</value>
-			</list>
-		</property>
-		
-		<property name="param" value="1234"></property>
-		<property name="map">
-			<map>
-				<entry key="key1" value="value1"></entry>
-				<entry key="key2" value="value2"></entry>
-			</map>
-		</property>
-	</bean>
-	
-	<bean id="service" class="com.zhuguang.jack.testbean.TestServiceImpl">
-	</bean>-->
+		<bean id="student" class="com.zhuguang.jack.testbean.Student">
+			<property name="list[0]" value="1"></property>
+			<property name="list[1]" value="2"></property>
+			<property name="list[2]" value="3"></property>
+
+			<property name="mylist">
+				<list>
+					<value>a</value>
+					<value>b</value>
+					<value>c</value>
+				</list>
+			</property>
+
+			<property name="param" value="1234"></property>
+			<property name="map">
+				<map>
+					<entry key="key1" value="value1"></entry>
+					<entry key="key2" value="value2"></entry>
+				</map>
+			</property>
+		</bean>
+
+		<bean id="service" class="com.zhuguang.jack.testbean.TestServiceImpl">
+		</bean>-->
 
 	<!-- 开启controller注解支持 -->
 	<!-- 注：如果base-package=com.avicit 则注解事务不起作用 TODO 读源码
@@ -184,13 +185,13 @@
 	</bean>
 	
 	<!--
-	<bean id="myservice" class="com.zhuguang.jack.service.MyServiceImpl"></bean>
-	<bean id="myaspectj" class="com.zhuguang.jack.aop.AopAspectj"></bean>
-	<bean id="myintroduction" class="com.zhuguang.jack.aop.IntroductionClass"></bean>
-	
-	<bean id="myInterceptor" class="com.zhuguang.jack.interceptor.MyInterceptor"></bean>
-	
-	<bean id="anno" class="com.zhuguang.jack.annotationaop.MyInterceptor"></bean>-->
+		<bean id="myservice" class="com.zhuguang.jack.service.MyServiceImpl"></bean>
+		<bean id="myaspectj" class="com.zhuguang.jack.aop.AopAspectj"></bean>
+		<bean id="myintroduction" class="com.zhuguang.jack.aop.IntroductionClass"></bean>
+
+		<bean id="myInterceptor" class="com.zhuguang.jack.interceptor.MyInterceptor"></bean>
+
+		<bean id="anno" class="com.zhuguang.jack.annotationaop.MyInterceptor"></bean>-->
 	
 	<bean id="mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass">
@@ -277,19 +278,19 @@
 		</property>
 		<property name="databaseIdProvider" ref="databaseIdProvider" />  
 		<property name="typeAliasesPackage" value="com.zhuguang.jack.dao"></property>
-		<!--<property name="plugins">
-				<array>
-					<bean class="com.zhuguang.jack.mybatisInterceptor.ExectorInterceptor"></bean>
-					<bean class="com.zhuguang.jack.mybatisInterceptor.PageInterceptor"></bean>
-					<bean class="com.zhuguang.jack.mybatisInterceptor.ResultSetCacheInterceptor"></bean>
-				</array>
-			</property>
 		<property name="plugins">
 			<array>
-				<bean class="com.zhuguang.jack.mybatisInterceptor.MyPubResultSetHandler"></bean>
-				<bean class="com.zhuguang.jack.mybatisInterceptor.CacheExecutorPlugin"></bean>
+				<bean class="com.zhuguang.jack.filter.ExcutorFilter"></bean>
+				<bean class="com.zhuguang.jack.filter.StatementHandlerFilter"></bean>
 			</array>
-		</property>-->
+		</property>
+		<!--
+			<property name="plugins">
+				<array>
+					<bean class="com.zhuguang.jack.mybatisInterceptor.MyPubResultSetHandler"></bean>
+					<bean class="com.zhuguang.jack.mybatisInterceptor.CacheExecutorPlugin"></bean>
+				</array>
+			</property>-->
 	</bean>
 
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
@@ -298,11 +299,9 @@
 		
 		<!--这样会导致property-placeholder加载配置文件失效
 			<property name="sqlSessionFactory" ref="sqlSessionFactory"/>-->
-		
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
 	</bean>
-
-
+	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="${dataSource}"/>
 	</bean>
